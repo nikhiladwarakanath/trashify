@@ -1,19 +1,46 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
-
+<html>
+ 
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+  <script   src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCNR2n7PdAC_kRTZrympwhSXDWnSawD9AE">
+  </script>
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7"
-        crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="/css/stylehome.css">
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans|Roboto+Slab' rel='stylesheet' type='text/css'>
+
 </head>
 
 <body>
-    <H1>HELLO</H1>
+  <div id="googleMap" style="width:1500px;height:650px;"></div>
+
+
+  <script>
+    var pos;
+    var geoSuccess;
+    window.onload = function () {
+        geoSuccess = function (position) {
+        pos = position;
+        console.log(pos);
+        var latLong = new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude);
+        var mapProp = {
+          center: latLong,
+          zoom: 13,
+          mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+
+        var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
+        var marker = new google.maps.Marker({
+          position: latLong,
+          map: map
+        });
+
+      };
+      navigator.geolocation.getCurrentPosition(geoSuccess);
+
+    }
+  
+
+    </script>
 </body>
 
 </html>
