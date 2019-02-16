@@ -2,25 +2,41 @@
 <html>
 
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCNR2n7PdAC_kRTZrympwhSXDWnSawD9AE">
+  </script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+    <link type="text/css" rel="stylesheet" href="/css/style.css">
 
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCNR2n7PdAC_kRTZrympwhSXDWnSawD9AE">
-    </script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    
+
 </head>
 
-<body>
-  <div id="googleMap" style="width:1500px;height:650px;"></div>
-  <br />
-  <button type="button" class="btn btn-info" onclick="LocationUpdate()">Use my Location</button>
+<body onload="initialize()">
+    <div class="col-md-5 text-center"> 
+    <button type="button" class="btn btn-info" onclick="LocationUpdate()">Use my Location</button>
+    </div>
+    <br/>
+
+  <div class="container">
+    <div>
+        <div id="googleMap" ></div>
+        
+    </div>
+  </div>
   
 
 
+
   <script>
+    
     var pos;
     var geoSuccess;
+    function initialize(){
     var latLong = new google.maps.LatLng(40.7128, -74.0060);
     var mapProp = {
       center: latLong,
@@ -31,9 +47,12 @@
     var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
     var marker = new google.maps.Marker({
       position: latLong,
-      map: map
+      map: map,
+      icon: {
+        url: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png"
+      }
     });
-
+  }
     function LocationUpdate() {
       if (navigator.geolocation) {
         geoSuccess = function (position) {
@@ -49,7 +68,10 @@
           var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
           var marker = new google.maps.Marker({
             position: latLong,
-            map: map
+            map: map,
+            icon: {
+              url: "http://maps.google.com/mapfiles/ms/icons/green-dot.png"
+            }
           });
 
         };
