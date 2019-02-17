@@ -44,15 +44,9 @@
               title: "Marker"+i,
             });
             google.maps.event.addListener(marker,'click', function () {
-              var m = this;
-              
-              window.location.href = "https://www.google.com/maps/dir/?api=1&destination=" +
-                m.latitude +
-                "," +
-                m.longitude +
-                "&travelmode=walking&dir_action=navigate";
-
+              map.setCenter(this.getPosition()); 
             });
+
           }
         };
 
