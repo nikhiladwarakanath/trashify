@@ -2,57 +2,57 @@
 <html>
 
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCNR2n7PdAC_kRTZrympwhSXDWnSawD9AE">
   </script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
     integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
     crossorigin="anonymous"></script>
-    <link type="text/css" rel="stylesheet" href="/css/style.css">
+  <link type="text/css" rel="stylesheet" href="/css/style.css">
 
 
 </head>
 
 <body onload="initialize()">
-    <div class="col-md-5 text-center"> 
+  <div class="col-md-5 text-center">
     <button type="button" class="btn btn-info" onclick="LocationUpdate()">Use my Location</button>
-    </div>
-    <br/>
+  </div>
+  <br />
 
   <div class="container">
     <div>
-        <div id="googleMap" ></div>
-        
+      <div id="googleMap"></div>
+
     </div>
   </div>
-  
+
 
 
 
   <script>
-    
+
     var pos;
     var geoSuccess;
-    function initialize(){
-    var latLong = new google.maps.LatLng(40.7128, -74.0060);
-    var mapProp = {
-      center: latLong,
-      zoom: 13,
-      mapTypeId: google.maps.MapTypeId.ROADMAP
-    };
+    function initialize() {
+      var latLong = new google.maps.LatLng(40.7128, -74.0060);
+      var mapProp = {
+        center: latLong,
+        zoom: 13,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+      };
 
-    var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
-    var marker = new google.maps.Marker({
-      position: latLong,
-      map: map,
-      icon: {
-        url: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png"
-      }
-    });
-  }
+      var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
+      var marker = new google.maps.Marker({
+        position: latLong,
+        map: map,
+        icon: {
+          url: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png"
+        }
+      });
+    }
     function LocationUpdate() {
       if (navigator.geolocation) {
         geoSuccess = function (position) {
@@ -73,7 +73,13 @@
               url: "http://maps.google.com/mapfiles/ms/icons/green-dot.png"
             }
           });
-
+          marker.addListener('click', function () {
+            window.location.href = "https://www.google.com/maps/dir/?api=1&destination=" +
+              pos.coords.latitude +
+              "," +
+              pos.coords.longitude +
+              "&travelmode=walking&dir_action=navigate";
+          });
         };
         navigator.geolocation.getCurrentPosition(geoSuccess);
 
