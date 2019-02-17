@@ -31,6 +31,13 @@ module.exports = () => {
         });
 
     });
+  router.get('/About', ( _req, res, next) => {
+        return res.render('home', {
+            page: 'Home'
+        });
+
+    });
+
 
   router.get('/closeBins', (req,res,next) => {
     let rawData = fs.readFileSync('./data/data.json')

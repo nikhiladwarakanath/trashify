@@ -3,7 +3,27 @@ html, body {
     width:100%;
     margin: 0;
     padding: 0;
+    font-family: 'Roboto', sans-serif;
+    background: #60009117;
+    color: #000000de;
 }
-.container, .container > div, .container > div #googleMap {
+
+body {
+  display: inline;
+}
+
+.style-header {
+  font-family: 'Lobster', cursive;
+  font-size: 8vw;
+  color: #57068c; 
+}
+
+.btn-style, .btn-style:hover, .btn-style:focus, .btn-style:active {
+  background: #57068c;
+  color: white;
+}
+
+.container > div #googleMap {
     height: inherit;
+    position: unset !important;
 }
