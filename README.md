@@ -23,3 +23,4 @@ Kavyashree Umesh Bangalore,
 Nikhila Dwarakanath
 
 ## License
+The project uses Apache Licese 2.0, which can be found in [LICENSE](./LICENSE)
