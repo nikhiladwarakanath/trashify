@@ -18,8 +18,9 @@ Android App
 Mobile app built on Kotlin and Node Runtime with Express
 
 ## Authors
-Aakaash Jois
-Kavyashree Umesh Bangalore
+Aakaash Jois,
+Kavyashree Umesh Bangalore,
 Nikhila Dwarakanath
 
 ## License
+The project uses Apache Licese 2.0, which can be found in [LICENSE](./LICENSE)
