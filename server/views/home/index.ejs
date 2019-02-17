@@ -12,10 +12,25 @@
 
 </head>
 
-<body onLoad="LocationUpdate()  ">
+<body>
+  <div class ="container">
+    <h1>"Use Me!"</h1>
+    <br>
+    <br>
+    <h3> About us </h3>
+    <p class="">
+    We are a bunch of environmentally concious students trying to do our part to reduce Global warming.
+    After analysing data and running prediction models on the same, we understood how huge a problem garbage is. Even though we can segragate waste as recyclable or not, it is still hard to actually recycle the waste.
+    Imagine, there are so many things which are a mixture of plastic, metal and stylafoam. It is hard to seperate one type of material from the other.
+    Mismanaged plastic and waste ultimately finds its way into ocean. I believe we have all seen the effects of that.
+    The least we can do to help, is to segregate waste at source. With the hope that such a statistic can be improved.
+    Kindly, use our app to help us facilitate the path for you.
+    </p>
+  </div>
   <div class="col-md-5 text-center">
   </div>
   <br />
+  <button onClick="LocationUpdate()" id="showMap">Show me!</button>
 
   <div class="container">
     <div>
@@ -23,74 +38,11 @@
 
     </div>
   </div>
+  <map>
+    <% include ./maps.ejs %>
+  </map>
 
-  <script>
-
-    
-    function LocationUpdate() {
-      if (navigator.geolocation) {
-        geoSuccess = function (position) {
-          pos = position;
-          console.log(pos);
-          var latLong = new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude);
-          var mapProp = {
-            center: latLong,
-            zoom: 13,
-            mapTypeId: google.maps.MapTypeId.ROADMAP
-          };
-
-          var closeBins
-          $.ajax({
-            cache: false,
-            url: '/closeBins?' + "latitude=" + pos.coords.latitude + "&longitude=" + pos.coords.longitude,
-            type: 'GET',
-            async: false,
-            contentType: "application/json; charset=utf-8",
-            success: function (response) {
-              closeBins = response
-            }
-          });
-          console.log("close bins: " + closeBins)
-
-          var mapProp = {
-            center: { lat: closeBins[2]["latitude"], lng: closeBins[2]["longitude"] },
-            zoom: 13,
-            mapTypeId: google.maps.MapTypeId.ROADMAP
-          };
-
-
-          var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
-          for (i = 0; i < closeBins.length; i++) {
-            var bin = closeBins[i];
-            console.log("closeBins[i] " + i + " " + bin)
-            var marker = new google.maps.Marker({
-              position: { lat: bin["latitude"], lng: bin["longitude"] },
-              map: map,
-              icon: {
-                url: "http://maps.google.com/mapfiles/ms/icons/green-dot.png"
-              },
-              title: "Marker"+i,
-            });
-            google.maps.event.addListener(marker,'click', function () {
-              var m = this;
-              
-              window.location.href = "https://www.google.com/maps/dir/?api=1&destination=" +
-                m.latitude +
-                "," +
-                m.longitude +
-                "&travelmode=walking&dir_action=navigate";
-
-            });
-          }
-        };
-
-      }
-
-      navigator.geolocation.getCurrentPosition(geoSuccess);
-    }
-  </script>
-
-
+  
 </body>
 
 </html>

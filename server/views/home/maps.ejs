@@ -1,0 +1,65 @@
+<script>
+    function LocationUpdate() {
+      if (navigator.geolocation) {
+        geoSuccess = function (position) {
+          pos = position;
+          console.log(pos);
+          var latLong = new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude);
+          var mapProp = {
+            center: latLong,
+            zoom: 13,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+          };
+
+          var closeBins
+          $.ajax({
+            cache: false,
+            url: '/closeBins?' + "latitude=" + pos.coords.latitude + "&longitude=" + pos.coords.longitude,
+            type: 'GET',
+            async: false,
+            contentType: "application/json; charset=utf-8",
+            success: function (response) {
+              closeBins = response
+            }
+          });
+          console.log("close bins: " + closeBins)
+
+          var mapProp = {
+            center: { lat: closeBins[2]["latitude"], lng: closeBins[2]["longitude"] },
+            zoom: 13,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+          };
+
+
+          var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
+          for (i = 0; i < closeBins.length; i++) {
+            var bin = closeBins[i];
+            console.log("closeBins[i] " + i + " " + bin)
+            var marker = new google.maps.Marker({
+              position: { lat: bin["latitude"], lng: bin["longitude"] },
+              map: map,
+              icon: {
+                url: "http://maps.google.com/mapfiles/ms/icons/green-dot.png"
+              },
+              title: "Marker"+i,
+            });
+            google.maps.event.addListener(marker,'click', function () {
+              var m = this;
+              
+              window.location.href = "https://www.google.com/maps/dir/?api=1&destination=" +
+                m.latitude +
+                "," +
+                m.longitude +
+                "&travelmode=walking&dir_action=navigate";
+
+            });
+          }
+        };
+
+      }
+
+      navigator.geolocation.getCurrentPosition(geoSuccess);
+    }
+  </script>
+
+
