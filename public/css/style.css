@@ -24,6 +24,13 @@ body {
 }
 
 .container > div #googleMap {
-    height: inherit;
+    height: 20vw;
+    width: 80vw;
     position: unset !important;
+}
+
+.white-bg {
+  background: white;
+  padding: 5%;
+  border-radius: 100%;
 }
