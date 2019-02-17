@@ -7,7 +7,7 @@
           var latLong = new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude);
           var mapProp = {
             center: latLong,
-            zoom: 13,
+            zoom: 16,
             mapTypeId: google.maps.MapTypeId.ROADMAP
           };
 
@@ -25,13 +25,18 @@
           console.log("close bins: " + closeBins)
 
           var mapProp = {
-            center: { lat: closeBins[2]["latitude"], lng: closeBins[2]["longitude"] },
-            zoom: 13,
+            center: { lat: pos.coords.latitude, lng: pos.coords.longitude },
+            zoom: 16,
             mapTypeId: google.maps.MapTypeId.ROADMAP
           };
 
-
           var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
+
+          var marker = new google.maps.Marker({
+            position: { lat: pos.coords.latitude, lng: pos.coords.longitude },
+            map: map
+          });
+
           for (i = 0; i < closeBins.length; i++) {
             var bin = closeBins[i];
             console.log("closeBins[i] " + i + " " + bin)
