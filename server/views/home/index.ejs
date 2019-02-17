@@ -8,17 +8,14 @@
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCNR2n7PdAC_kRTZrympwhSXDWnSawD9AE">
     </script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    
 </head>
-
+ 
 <body>
   <div id="googleMap" style="width:1500px;height:650px;"></div>
   <br />
   <button type="button" class="btn btn-info" onclick="LocationUpdate()">Use my Location</button>
-  
+    <script type="text/javascript">
 
-
-  <script>
     var pos;
     var geoSuccess;
     var latLong = new google.maps.LatLng(40.7128, -74.0060);
@@ -30,10 +27,10 @@
 
     var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
     var marker = new google.maps.Marker({
-      position: latLong,
-      map: map
-    });
-
+            position: latLong,
+            map: map
+          });
+    
     function LocationUpdate() {
       if (navigator.geolocation) {
         geoSuccess = function (position) {
@@ -46,20 +43,43 @@
             mapTypeId: google.maps.MapTypeId.ROADMAP
           };
 
-          var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
-          var marker = new google.maps.Marker({
-            position: latLong,
-            map: map
-          });
+          var closeBins
+            $.ajax({
+                  cache: false,
+                  url: '/closeBins?'+"latitude="+pos.coords.latitude+"&longitude="+pos.coords.longitude,
+                  type: 'GET',
+                  async: false,
+                  contentType: "application/json; charset=utf-8",
+                  success: function (response) {
+                      closeBins = response
+                  }
+             });
+          console.log("close bins: "+closeBins)
 
+          var mapProp = {
+            center: {lat:closeBins[2]["latitude"],lng: closeBins[2]["longitude"]},
+            zoom: 13,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+          };
+
+
+          var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
+          for (i = 0; i < closeBins.length; i++) {
+            var bin = closeBins[i];
+            console.log("closeBins[i] "+i+" "+bin)
+            var marker = new google.maps.Marker({
+              position: {lat: bin["latitude"], lng: bin["longitude"]},
+              map: map
+            });
+          }
         };
         navigator.geolocation.getCurrentPosition(geoSuccess);
 
       }
     }
-
-
   </script>
-</body>
+
+
+ </body>
 
 </html>
