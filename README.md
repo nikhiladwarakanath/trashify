@@ -16,7 +16,7 @@ Front End -  HTML5, CSS, Bootstrap, jQuery
 Android - Kotlin, Google Maps API, Fuel(HTTP Requests and JSON Parsing)
 
 ## Android App
-The Android application can be downloaded [here](./data/Trashify.apk).
+The Android application can be downloaded [here](https://github.com/nikhiladwarakanath/trashify/raw/master/data/Trashify.apk).
 
 ## Authors
 Aakaash Jois
