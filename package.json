@@ -12,6 +12,6 @@
   "dependencies": {
     "ejs": "^2.6.1",
     "express": "^4.16.4",
-    "geolib": "^2.0.24",
+    "geolib": "^2.0.24"
   }
 }
