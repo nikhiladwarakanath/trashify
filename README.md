@@ -13,13 +13,16 @@ The locations and information of the waste disposal bins are obtained from the D
 Backend - Node Runtime with Express
 Templating Engine- EJS
 Front End -  HTML5, CSS, Bootstrap, jQuery
+Android - Kotlin, Google Maps API, Fuel(HTTP Requests and JSON Parsing)
 
-Android App
-Mobile app built on Kotlin and Node Runtime with Express
+## Android App
+The Android application can be downloaded [here](./data/Trashify.apk).
 
 ## Authors
-Aakaash Jois,
-Kavyashree Umesh Bangalore,
+Aakaash Jois
+
+Kavyashree Umesh Bangalore
+
 Nikhila Dwarakanath
 
 ## License
