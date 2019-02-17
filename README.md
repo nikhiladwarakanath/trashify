@@ -18,8 +18,8 @@ Android App
 Mobile app built on Kotlin and Node Runtime with Express
 
 ## Authors
-Aakaash Jois
-Kavyashree Umesh Bangalore
+Aakaash Jois,
+Kavyashree Umesh Bangalore,
 Nikhila Dwarakanath
 
 ## License
